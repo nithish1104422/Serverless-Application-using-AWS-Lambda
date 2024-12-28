@@ -1,0 +1,1 @@
+A serverless REST API built with AWS Lambda, API Gateway, and DynamoDB. Features include creating, retrieving, and deleting items with DynamoDB as the backend. Deployed using AWS SAM, this project demonstrates scalable, cost-effective, and event-driven architecture for modern cloud applications.
