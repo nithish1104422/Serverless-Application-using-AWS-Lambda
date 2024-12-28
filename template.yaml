@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  ItemsApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      CodeUri: .
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: ItemsTable
+      Events:
+        GetItems:
+          Type: Api
+          Properties:
+            Path: /items
+            Method: get
+        AddItem:
+          Type: Api
+          Properties:
+            Path: /items
+            Method: post
+        DeleteItem:
+          Type: Api
+          Properties:
+            Path: /items
+            Method: delete
+
+  ItemsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ItemsTable
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
